@@ -6,6 +6,7 @@ on:
     paths:
       - app/frontend/commons.html
       - app/cli/assets/**
+      - seeds/ui_runtime/**
       - BEAST_mascot-removebg-preview.png
       - BEAST__Inference_Economy.mp4
       - BEAST_INFERENCE_INVERSION.pptx
@@ -47,6 +48,11 @@ jobs:
           [ ! -f BEAST_mascot-removebg-preview.png ] || cp BEAST_mascot-removebg-preview.png _site/commons-media/beast-logo.png
           [ ! -f BEAST__Inference_Economy.mp4 ] || cp BEAST__Inference_Economy.mp4 _site/commons-media/inference-economy.mp4
           [ ! -f BEAST_INFERENCE_INVERSION.pptx ] || cp BEAST_INFERENCE_INVERSION.pptx _site/commons-media/inference-inversion.pptx
+
+          # Copy seeds/ui_runtime for UI runtime initialization
+          if [ -d seeds/ui_runtime ]; then
+            cp -R seeds/ui_runtime _site/seeds/
+          fi
 
           # GitHub project Pages lives under /EdgeK-BEAST/, so root-absolute
           # asset URLs must become document-relative URLs.
